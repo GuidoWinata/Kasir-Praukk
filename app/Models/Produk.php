@@ -13,9 +13,16 @@ class Produk extends Model
 
     protected $fillable = [
         'NamaProduk',
+        'kategori_id',
+        'Price',
+        'image_path',
         'Harga',
         'Stok'
     ]; 
 
     public $timestamps = false;
+
+    public function kategori(){
+        return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
 }
