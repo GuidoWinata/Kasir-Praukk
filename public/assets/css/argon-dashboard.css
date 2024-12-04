@@ -175,6 +175,16 @@ address {
   border-radius: 8px;  
 }
 
+.trx-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  border-radius: 0 0 15px 0;
+  height: 55px;
+  background-color: var(--bs-secondary);
+}
+
 .price-label{
   position: absolute;
   top: 0;

@@ -13,7 +13,9 @@ class Penjualan extends Model
     protected $fillable = [
         'pelangganID',
         'TanggalPenjualan',
-        'TotalHarga'
+        'TotalHarga',
+        'tempat_id',
+        'created_by'
     ]; 
     public $timestamps = false;
 

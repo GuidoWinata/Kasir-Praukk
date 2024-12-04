@@ -54,6 +54,19 @@
                                                 @include('layouts.icons.item')
                                                 <p class="m-0 ps-1">{{ $p->Stok }} item</p>
                                             </div>
+                                            <div class="dropdown ms-auto">
+                                                <button type="button" data-bs-toggle="dropdown" class="bg-transparent border-0" aria-expanded="false">
+                                                    @include('layouts.icons.dehaze')
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                  <li><a class="dropdown-item text-success" href="{{ route('produk.update', ["id" => $p->id]) }}">Edit</a></li>
+                                                  <form action="{{ route('produk.delete', ['id' => $p->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                      <li><button type="submit" class="dropdown-item text-danger" href="#">Hapus</button></li>
+                                                  </form>
+                                                </ul>
+                                              </div>
                                         </div>
                                     </div>
                                 </div>

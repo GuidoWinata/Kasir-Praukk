@@ -17,7 +17,8 @@ class Produk extends Model
         'Price',
         'image_path',
         'Harga',
-        'Stok'
+        'Stok',
+        'tempat_id'
     ]; 
 
     public $timestamps = false;

@@ -25,6 +25,8 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use App\Models\Kategori;
 
@@ -40,6 +42,8 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
 	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 
@@ -53,6 +57,11 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/do-create', [KategoriController::class, 'doCreate'])->name('doCreate');
 	});
 
+	Route::prefix('/penjualan')->group(function () {
+		Route::get('/index', [PenjualanController::class, 'index'])->name('penjualan');
+		Route::post('/add', [PenjualanController::class, 'store'])->name('penjualan.add');
+	});
+
 	//PRODUK
 	Route::prefix('/produk')->group(function() {
 		Route::get('/list', [ProdukController::class, 'index'])->name('produk');
@@ -63,9 +72,19 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/do-create', [ProdukController::class, 'doCreate'])->name('produk.doCreate');
 	});
 
-	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
+	// PEGAWAI
+	Route::prefix('/pegawai')->group(function() {
+		Route::get('/list', [PegawaiController::class, 'index'])->name('pegawai');
+		Route::get('/add', [PegawaiController::class, 'add'])->name('pegawai.add');
+		Route::get('/update/{id}', [PegawaiController::class, 'update'])->name('pegawai.update');
+		Route::put('/do-update/{id}', [PegawaiController::class, 'doUpdate'])->name('pegawai.doUpdate');
+		Route::delete('/delete/{id}', [PegawaiController::class, 'delete'])->name('pegawai.delete');
+		Route::post('/do-create', [PegawaiController::class, 'doCreate'])->name('pegawai.doCreate');
+	});
+	
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
-	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
+
+	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
 	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static'); 
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 
